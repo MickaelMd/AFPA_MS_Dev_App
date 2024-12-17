@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Contact - {{ objet }}</title>
+    </head>
+    <body>
+        <h1>Vous avez reçu un nouveau message !</h1>
+        <p><strong>De :</strong> {{ user_email }}</p>
+        <p><strong>Sujet :</strong> {{ objet }}</p>
+        <p><strong>Message :</strong></p>
+        <p>{{ message|nl2br }}</p>
+    </body>
+</html>
