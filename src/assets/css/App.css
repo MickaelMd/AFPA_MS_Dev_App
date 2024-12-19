@@ -1,0 +1,27 @@
+body {
+  background-color: rgb(27, 27, 27);
+  color: white;
+}
+
+#btn_zone {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 50px;
+}
+
+#btn_compteur {
+  padding: 12px 80px;
+  border-radius: 12px;
+  font-size: 16px;
+  border: none;
+  transition: 100ms;
+}
+
+#btn_compteur:hover {
+  background-color: rgb(196, 196, 196);
+  cursor: pointer;
+}
+.mt-50px {
+  margin-top: 50px;
+}
