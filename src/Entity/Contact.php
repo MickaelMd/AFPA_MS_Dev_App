@@ -5,8 +5,25 @@ namespace App\Entity;
 use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(),
+        // new Put(),
+        // new Patch(),
+        // new Delete(),
+        new GetCollection(),
+        // new Post()
+    ],
+    security: "is_granted('ROLE_USER')", 
+    securityPostDenormalize: "is_granted('ROLE_ADMIN')", 
+)]
+
+
 class Contact
 {
     #[ORM\Id]

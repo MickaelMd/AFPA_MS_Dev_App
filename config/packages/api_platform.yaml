@@ -1,0 +1,12 @@
+api_platform:
+  title: "My API"
+  description: "API for my project"
+  version: "1.0.0"
+  enable_swagger_ui: true
+  enable_re_doc: true
+  enable_docs: true
+  defaults:
+    stateless: false
+    cache_headers:
+      vary: ["Content-Type", "Authorization", "Origin"]
+    format: json
