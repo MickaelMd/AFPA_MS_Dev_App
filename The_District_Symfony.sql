@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 24 déc. 2024 à 10:12
+-- Généré le : ven. 03 jan. 2025 à 08:46
 -- Version du serveur : 10.11.8-MariaDB-0ubuntu0.24.04.1
 -- Version de PHP : 8.3.6
 
@@ -64,6 +64,30 @@ CREATE TABLE `commande` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `contact`
+--
+
+CREATE TABLE `contact` (
+  `id` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `objet` varchar(255) NOT NULL,
+  `message` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `contact`
+--
+
+INSERT INTO `contact` (`id`, `email`, `objet`, `message`) VALUES
+(1, 'test@test.com', 'test', 'test'),
+(2, 'test@test.com', 'dza', 'da'),
+(3, 'daz@gmail.com', 'da', 'da'),
+(4, 'daz@gmail.com', 'test', 'dza'),
+(5, 'daz@gmail.com', 'da', 'd');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `detail`
 --
 
@@ -74,25 +98,6 @@ CREATE TABLE `detail` (
   `quantite` int(11) NOT NULL,
   `total` decimal(6,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `doctrine_migration_versions`
---
-
-CREATE TABLE `doctrine_migration_versions` (
-  `version` varchar(191) NOT NULL,
-  `executed_at` datetime DEFAULT NULL,
-  `execution_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
-
---
--- Déchargement des données de la table `doctrine_migration_versions`
---
-
-INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20241224094022', '2024-12-24 09:40:26', 253);
 
 -- --------------------------------------------------------
 
@@ -178,18 +183,18 @@ ALTER TABLE `commande`
   ADD KEY `IDX_6EEAA67DFB88E14F` (`utilisateur_id`);
 
 --
+-- Index pour la table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `detail`
 --
 ALTER TABLE `detail`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_2E067F93D73DB560` (`plat_id`),
   ADD KEY `IDX_2E067F9382EA2E54` (`commande_id`);
-
---
--- Index pour la table `doctrine_migration_versions`
---
-ALTER TABLE `doctrine_migration_versions`
-  ADD PRIMARY KEY (`version`);
 
 --
 -- Index pour la table `messenger_messages`
@@ -229,6 +234,12 @@ ALTER TABLE `categorie`
 --
 ALTER TABLE `commande`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `detail`
