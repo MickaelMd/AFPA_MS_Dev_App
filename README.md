@@ -10,6 +10,7 @@
 - [x] Mise en place de la structure du site.
 - [x] Gestion de l'authentification.
 - [x] Gestion des rôles et l'accès aux pages.
+- [ ] Page de gestion des plats et des commandes par le ROLE_CHEF et ROLE_ADMIN
 
 - [ ] Mise en place du panier (list, add, remove).
 - [ ] Validation de la commande.
