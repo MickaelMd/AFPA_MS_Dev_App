@@ -51,7 +51,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
 
-    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Commande::class)]
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Commande::class, cascade: ['persist', 'remove'])]
     private Collection $commandes;
 
     public function __construct()
@@ -93,11 +93,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        $roles = array_unique($this->roles); 
+        if (!in_array('ROLE_CLIENT', $roles)) {
+            $roles[] = 'ROLE_CLIENT';
+        }
+    
+        return $roles;
     }
 
     /**

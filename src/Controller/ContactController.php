@@ -25,6 +25,7 @@ class ContactController extends AbstractController
             $entityManager->persist($message);
             $entityManager->flush();
     
+
             return $this->redirectToRoute('app_contact_success');
         }
     

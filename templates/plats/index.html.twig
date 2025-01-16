@@ -3,18 +3,31 @@
 {% block title %}The District : Plats{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h2 class="m-3 text-center">Nos plats</h2>
+<section id="cards_index_plat_general">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/mickaelm/Mickael/testtestfixture/src/Controller/PlatsController.php</code></li>
-        <li>Your template at <code>/home/mickaelm/Mickael/testtestfixture/templates/plats/index.html.twig</code></li>
-    </ul>
-</div>
+
+    {% for plat in plats %}
+      
+      <div class="cards_index_plat">
+      
+        <h3 class="text-center pt-1 pb-1 mt-2"> {{plat.libelle}} </h3>
+
+        <div class="cards_index_plat_img">
+        <img src="{{ asset('/assets/img/food/' ~ plat.image) }}"  alt="Image {{plat.libelle}}"> 
+        </div>
+
+       <a class="btn_commande_plat" href="{{ path('app_plat_show', {'id': plat.id}) }}">Commander</a>
+      </div>
+
+    {% else %}
+       <h1 class="erreur_bdd text-danger"> Erreur dans le chargement des plats. </h1>
+    {% endfor %}
+
+</section>
+
+
 {% endblock %}
+
+
