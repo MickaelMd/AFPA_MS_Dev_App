@@ -17,12 +17,12 @@
 - [x] Installation d'Api Platform
 - [x] Rendre visibles les entités Catégories et Plats
 - [x] Utilisation de l'API dans l'application
-- [ ] Rendre disponible la documentation de l'API via OpenAPI (ex. Swagger)
+- [x] Rendre disponible la documentation de l'API via OpenAPI (ex. Swagger) (-- Désactiver asset_mapper --)
 
 ### Panier et gestion des commandes :
 
-- [ ] Mise en place du panier (list, add, remove) dans un `service`
-- [ ] Validation de la commande
+- [x] Mise en place du panier (list, add, remove) dans un `service`
+- [x] Validation de la commande
 - [ ] Gestion des mails via un `EventSubscriber`
 
 ### Design et responsivité :
@@ -30,9 +30,31 @@
 - [x] Utilisation de Bootstrap
 - [x] Site entièrement responsive
 
+---
+
 ### Exercices :
 
 Liens vers les exercices du module Dev-App
 
 - [Symfony](https://github.com/MickaelMd/AFPA_MS_Dev_App/tree/1.-Symfony)
 - [React](https://github.com/MickaelMd/AFPA_MS_Dev_App/tree/2.-React)
+
+Pour cloner une seule branche du dépôt :
+
+The District
+
+```bash
+git clone --single-branch --branch main https://github.com/MickaelMd/AFPA_MS_Dev_App.git
+```
+
+Exercices Symfony
+
+```bash
+bashgit clone --single-branch --branch 1.-Symfony https://github.com/MickaelMd/AFPA_MS_Dev_App.git
+```
+
+Exercices React
+
+```bash
+git clone --single-branch --branch 2.-React https://github.com/MickaelMd/AFPA_MS_Dev_App.git
+```
