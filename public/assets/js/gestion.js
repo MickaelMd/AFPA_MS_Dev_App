@@ -66,8 +66,32 @@ document.addEventListener("DOMContentLoaded", function () {
         show_img.src = event.target.result;
       };
       reader.readAsDataURL(file);
+
+      in_image.value = upload_img.value.split("\\").pop().replace(/ /g, "_");
+      console.log(upload_img.value);
     } else {
       show_img.src = "";
+    }
+  });
+
+  // --------------------------
+
+  const commandeSelect = document.getElementById("commande-select");
+
+  commandeSelect.addEventListener("change", (event) => {
+    const selectedCommandeId = event.target.value;
+
+    document.querySelectorAll(".commande-details").forEach((div) => {
+      div.style.display = "none";
+    });
+
+    if (selectedCommandeId) {
+      const detailsDiv = document.getElementById(
+        `details-commande-${selectedCommandeId}`
+      );
+      if (detailsDiv) {
+        detailsDiv.style.display = "block";
+      }
     }
   });
 });
