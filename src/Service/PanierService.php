@@ -27,6 +27,11 @@ class PanierService
         return $this->session->get('Panier', []);
     }
 
+    public function getPanierCount(): int
+    {
+        return count($this->getPanier());
+    }
+
     public function getPanierQuantites(): array
     {
     $panier = $this->getPanier(); 
