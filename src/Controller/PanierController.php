@@ -30,12 +30,11 @@ public function index(PlatRepository $platRepository): Response
     $commande_list = $this->panierService->getPanierQuantites();
 
     if (empty($commande_list)) {
-        $this->addFlash('error', 'Votre panier est vide.');
+        $this->addFlash('error', 'Votre panier est vide. <script> localStorage.setItem("panier", JSON.stringify([]));</script>');
         return $this->redirectToRoute('app_plats');
     }
 
     $plats = $platRepository->findBy(['id' => array_keys($commande_list)]);
-
     $platsAvecQuantites = [];
     $total = 0;
 
@@ -52,6 +51,7 @@ public function index(PlatRepository $platRepository): Response
         'controller_name' => 'PanierController',
         'plats' => $platsAvecQuantites,
         'total' => $total,
+        'user' => $this->getUser(),
     ]);
 }
 
@@ -65,18 +65,18 @@ public function index(PlatRepository $platRepository): Response
         }
 
         if ($this->panierService->getPanier() == []) {
-            $this->addFlash('error', 'Votre panier est vide.');
+            $this->addFlash('error', 'Votre panier est vide. <script> localStorage.setItem("panier", JSON.stringify([]));</script>');
             return $this->redirectToRoute('app_plats');
         }
 
         if (array_search($id, $this->panierService->getPanier()) === false) {
-            $this->addFlash('error', 'Le plat n\'est pas dans le panier.');
+            $this->addFlash('success', 'Le plat a été supprimé du panier. <script>localStorage.setItem("panier", JSON.stringify(JSON.parse(localStorage.getItem("panier") || "[]").filter(item => item !== '. $id . '))) </script>');
             return $this->redirectToRoute('app_panier');
         }
 
         $this->panierService->removePanier($id);
 
-        $this->addFlash('success', 'Le plat a été supprimé du panier.');
+        $this->addFlash('success', 'Le plat a été supprimé du panier. <script>localStorage.setItem("panier", JSON.stringify(JSON.parse(localStorage.getItem("panier") || "[]").filter(item => item !== '. $id . '))) </script>');
         return $this->redirectToRoute('app_panier');
     }
 
@@ -93,7 +93,7 @@ public function index(PlatRepository $platRepository): Response
         }
 
         if ($this->panierService->getPanier() == []) {
-            $this->addFlash('error', 'Votre panier est vide.');
+            $this->addFlash('error', 'Votre panier est vide. <script> localStorage.setItem("panier", JSON.stringify([]));</script>');
             return $this->redirectToRoute('app_plats');
         }
 
@@ -104,7 +104,7 @@ public function index(PlatRepository $platRepository): Response
 
         if ($value <= 0) {
             $this->panierService->removePanier($id);
-            $this->addFlash('success', 'Le plat a été supprimé du panier.');
+            $this->addFlash('success', 'Le plat a été supprimé du panier. <script>localStorage.setItem("panier", JSON.stringify(JSON.parse(localStorage.getItem("panier") || "[]").filter(item => item !== '. $id . '))) </script>');
             return $this->redirectToRoute('app_panier');
         }
 
@@ -129,13 +129,13 @@ public function index(PlatRepository $platRepository): Response
         }
 
         if ($this->panierService->getPanier() == []) {
-            $this->addFlash('error', 'Votre panier est vide.');
+            $this->addFlash('error', 'Votre panier est vide. <script> localStorage.setItem("panier", JSON.stringify([]));</script>');
             return $this->redirectToRoute('app_plats');
         }
 
         $this->panierService->clearPanier();
 
-        $this->addFlash('success', 'Le panier a été vidé.');
+        $this->addFlash('success', 'Le panier a été vidé. <script> localStorage.setItem("panier", JSON.stringify([]));</script>');
         return $this->redirectToRoute('app_plats');
 
     }

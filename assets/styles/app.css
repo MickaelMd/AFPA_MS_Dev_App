@@ -146,7 +146,37 @@ nav ul li a:hover {
   display: none;
 }
 
-@media (max-width: 805px) {
+#cart_logo_footer {
+  position: fixed;
+  right: 2%;
+  transform: translateX(-50%);
+  transition: height 0.3s ease;
+  border-radius: 50%;
+  padding: 3px;
+  background-color: #9707487a;
+  transition: 150ms;
+}
+#cart_logo_footer img {
+  width: 60px;
+  height: 60px;
+  filter: invert(1);
+}
+#cart_logo_footer:hover {
+  background-color: #970748;
+}
+@media (max-width: 930px) {
+  nav ul li a {
+    padding: 0px;
+    margin: 0;
+  }
+}
+
+@media (max-width: 830px) {
+  #cart_logo_footer img {
+    width: 44px;
+    height: 44px;
+  }
+
   #logo_mobile_container {
     display: flex;
     align-items: center;
@@ -756,4 +786,86 @@ footer ul li a.active::after {
 #btn_command_delete:hover {
   box-shadow: 0px 0px 28px -18px;
   background-color: rgb(253, 156, 156);
+}
+
+#btn_edit_adresse {
+  background-color: #ffcd83;
+  text-decoration: none;
+  padding: 5px 10px;
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 150ms;
+  box-shadow: 0px 0px 20px -18px;
+}
+
+#btn_edit_adresse:hover {
+  background-color: #ffb340;
+}
+
+/* ------------ !!!!!!!!!!! - Profil - !!!!!!!!!!! ------------ */
+
+.card_profil_commande {
+  background-color: rgba(255, 255, 255, 0.705);
+  margin: 15px;
+  -webkit-box-shadow: 0px 0px 16px -4px #000000;
+  box-shadow: 0px 0px 16px -4px #000000;
+}
+
+#btn_delete_profil,
+#btn_confirm_profil {
+  background-color: rgb(252, 69, 69);
+  text-decoration: none;
+  padding: 15px 40px;
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 150ms;
+  box-shadow: 0px 0px 20px -18px;
+}
+
+#btn_delete_profil:hover,
+#btn_confirm_profil:hover {
+  background-color: rgb(253, 156, 156);
+}
+
+#profil_edit_section input {
+  width: 100%;
+  max-width: 500px;
+  margin: 5px 0px 5px 0px;
+  padding: 8px 12px;
+  border: 1px solid #c4c4c4;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+#profil_edit_section input:hover {
+  border-color: #970747;
+}
+#profil_edit_section input:focus {
+  border-color: #970747;
+  box-shadow: 0 0 8px #970747;
+  outline: none;
+}
+
+#profil_edit_section input::placeholder {
+  font-style: italic;
+}
+#profil_edit_section button {
+  padding: 5px 20px;
+  margin-top: 20px;
+  text-decoration: none;
+  background-color: #ffcd83;
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 150ms;
+  box-shadow: 0px 0px 20px -18px;
+}
+
+#profil_edit_section button:hover {
+  background-color: #ffb340;
 }

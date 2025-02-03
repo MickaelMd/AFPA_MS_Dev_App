@@ -33,7 +33,7 @@ class CommandeController extends AbstractController
         }
 
         if ($this->panierService->getPanier() == []) {
-            $this->addFlash('error', 'Votre panier est vide.');
+            $this->addFlash('error', 'Votre panier est vide. <script> localStorage.setItem("panier", JSON.stringify([]));</script>');
             return $this->redirectToRoute('app_plats');
         }
 
@@ -53,35 +53,38 @@ class CommandeController extends AbstractController
         $commande->setDateCommande($date);
         $commande->setEtat(0);
         
-        $this->entityManager->persist($commande);
-    
-        $platsGroupes = array_count_values($plat_id);
-
-        foreach ($platsGroupes as $platId => $quantitePlat) {
-        
-            $plat = $this->entityManager->getRepository(Plat::class)->find($platId);
-
-            if ($plat) {
-                
-                $detail = new Detail();
-                $detail->setPlat($plat);  
-                $detail->setQuantite($quantitePlat); 
-                $detail->setTotal($plat->getPrix() * $quantitePlat); 
-                $detail->setCommande($commande);
-
-                $this->entityManager->persist($detail);
-
-            } else {
-                $this->addFlash('error', 'Un ou plusieurs plats n\'ont pas été trouvés.');
-                return $this->redirectToRoute('app_panier');
-            }
-        }
-
-        $this->entityManager->flush();
-        $this->panierService->clearPanier();
-        
-        $this->addFlash('success', 'Votre commande a été validée avec succès.');
-        return $this->redirectToRoute('app_index');
-
-    }
-}
+             $this->entityManager->beginTransaction();
+             try {
+                 $this->entityManager->persist($commande);
+                 $platsGroupes = array_count_values($plat_id);
+     
+                 foreach ($platsGroupes as $platId => $quantitePlat) {
+                     $plat = $this->entityManager->getRepository(Plat::class)->find($platId);
+     
+                     if (!$plat) {
+                         throw new \Exception("Le plat avec l'ID $platId n'existe pas.");
+                     }
+     
+                     $detail = new Detail();
+                     $detail->setPlat($plat);
+                     $detail->setQuantite($quantitePlat);
+                     $detail->setTotal($plat->getPrix() * $quantitePlat);
+                     $detail->setCommande($commande);
+     
+                     $this->entityManager->persist($detail);
+                 }
+     
+                 $this->entityManager->flush();
+                 $this->entityManager->commit(); 
+                 $this->panierService->clearPanier();
+     
+                 $this->addFlash('success', 'Votre commande a été validée avec succès. <script> localStorage.setItem("panier", JSON.stringify([]));</script>');
+             } catch (\Exception $e) {
+                 $this->entityManager->rollback(); 
+                 $this->addFlash('error', 'Une erreur est survenue lors de la validation de votre commande : ' . $e->getMessage());
+                 return $this->redirectToRoute('app_panier');
+             }
+     
+             return $this->redirectToRoute('app_index');
+         }
+     }
