@@ -1,5 +1,7 @@
 ## The District Symfony Dev-App
 
+<img src="public/assets/img/the_district_brand/twitter_header_photo_2.png" width="500">
+
 ### Base de données :
 
 - [x] Création de la base de données
@@ -34,7 +36,7 @@
 
 ### Design et responsivité :
 
-- [x] Utilisation de ([Bootstrap](https://getbootstrap.com/)) (5.3.3)
+- [x] Utilisation de [Bootstrap](https://getbootstrap.com/) (5.3.3)
 - [x] Site entièrement responsive
 
 ### Sécurité :
